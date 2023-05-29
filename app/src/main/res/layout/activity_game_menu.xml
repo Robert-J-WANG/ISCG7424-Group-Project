@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/background_operator2"
+    android:padding="20dp">
+
+    <android.widget.Button
+        android:id="@+id/rd_btn"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/bg_border_red"
+        android:text="Random"
+        android:fontFamily="@font/architects_daughter"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="30sp" />
+
+    <android.widget.Button
+        android:id="@+id/add_btn"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_border_blue"
+        android:text="ADDITION"
+        android:fontFamily="@font/architects_daughter"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="30sp" />
+
+    <android.widget.Button
+        android:id="@+id/sub_btn"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_border_green"
+        android:text="SUBTRACTION"
+        android:fontFamily="@font/architects_daughter"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="30sp" />
+
+    <android.widget.Button
+        android:id="@+id/mul_btn"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_border_pink"
+        android:text="MULTIPLICATION"
+        android:fontFamily="@font/architects_daughter"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="30sp" />
+
+    <android.widget.Button
+        android:id="@+id/div_btn"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_border_brown"
+        android:text="DIVISION"
+        android:fontFamily="@font/architects_daughter"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="30sp" />
+
+</LinearLayout>

@@ -1,0 +1,42 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="@drawable/bg_border_white"
+    android:layout_margin="10dp"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/questionTextView"
+        android:layout_width="0dp"
+        android:layout_weight="2"
+        android:text="2 + 2"
+        android:gravity="center"
+        android:fontFamily="@font/architects_daughter"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/answerTextView"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:text="20"
+        android:fontFamily="@font/architects_daughter"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:textColor="@color/Blue"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/yourAnswerTextView"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:text="20"
+        android:fontFamily="@font/architects_daughter"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:textColor="@color/Green"
+        android:textSize="30sp" />
+
+</LinearLayout>

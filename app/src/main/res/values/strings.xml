@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Group Project</string>
+
+    <string name="your_score_is">YOUR SCORE IS :</string>
+    <string name="_70">70</string>
+    <string name="save">SAVE</string>
+    <string name="your_answer">YOUR ANSWER</string>
+    <string name="answer">ANSWER</string>
+    <string name="question">QUESTION</string>
+    <string name="game_return">RETURN</string>
+    <!-- Strings used for fragments for navigation -->
+
+    <string name="score_label">Score: %1$d</string>
+
+
+</resources>
