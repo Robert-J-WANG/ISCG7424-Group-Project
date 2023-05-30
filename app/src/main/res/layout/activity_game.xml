@@ -4,7 +4,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingLeft="20dp"
-    android:background="@drawable/background_operator2"
     android:paddingRight="20dp">
 
     <TextView
@@ -57,7 +56,7 @@
         android:paddingRight="16dp"
         android:text="Your Answer is..."
         android:textStyle="bold"
-        android:textColor="@color/blue"
+        android:textColor="@color/Brown"
         android:textSize="38sp" />
 
     <GridLayout

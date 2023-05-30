@@ -95,59 +95,21 @@ public class GameActivity extends AppCompatActivity {
 
         // generate 10 questions and 10 answers
         mode = getIntent().getIntExtra("mode",0);
-
         QuestionSet questionSet = new QuestionSet(numQuestions, mode);
         AnswerSet answerSet=new AnswerSet(questionSet);
 
         questions = questionSet.getQuestions();
         correctAnswers = answerSet.getAnswers();
         selectedAnswers = new ArrayList<Integer>();
+
+        // display questions and answers
         setQuestionAndAnswers();
 
         // add OnClickListener event to the answerTextViews
-        for (TextView answerTextView : answerTextViews) {
-            answerTextView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    selectedAnswer = ((TextView) v).getText().toString();
-                    // 添加selectedAnswer到selectedAnswers
-                    selectedAnswers.add(Integer.parseInt(selectedAnswer));
-                    try {
-                        if (selectedAnswer.equals(Integer.toString(correctAnswer))) {
-                            score+=10;
-                            ToastUtil.showMsg(getApplicationContext(), "you are right!");
-                        } else {
-                            ToastUtil.showMsg(getApplicationContext(), "you are wrong!");
-                        }
-
-                        if (index < questions.size()) {
-                            questionTextView.setText(questions.get(index));
-                            correctAnswer = correctAnswers.get(index);
-                            displayAnswer(correctAnswer);
-                            index++;
-                        }
-                        else{
-                            // Disable all answerTextViews after 10 questions
-                            // store questions, correctAnswers and selectedAnswers into the database by user id
-                            storeDateByUserID();
-
-                            Intent intent = new Intent(GameActivity.this, GameSaveActivity.class);
-                            intent.putExtra("score", score);
-                            intent.putExtra("userID", userID);
-                            startActivity(intent);
-
-                        }
-
-                        scoreTextView.setText("Score : "+score);
-                        progressBar.setProgress(++progress);
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
-        }
+        setAnswerClickListeners();
     }
+
+
 
     private void initializeFirebase() {
         firebaseDatabase = FirebaseDatabase.getInstance();
@@ -164,7 +126,6 @@ public class GameActivity extends AppCompatActivity {
             gameRef.child(userID).child("correctAnswers").push().setValue(correctAnswers);
             gameRef.child(userID).child("selectedAnswers").push().setValue(selectedAnswers);
         }
-
     }
 
     private void setQuestionAndAnswers() {
@@ -205,6 +166,49 @@ public class GameActivity extends AppCompatActivity {
 
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    private void setAnswerClickListeners() {
+        for (TextView answerTextView : answerTextViews) {
+            answerTextView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    selectedAnswer = ((TextView) v).getText().toString();
+                    // 添加selectedAnswer到selectedAnswers
+                    selectedAnswers.add(Integer.parseInt(selectedAnswer));
+                    try {
+                        if (selectedAnswer.equals(Integer.toString(correctAnswer))) {
+                            score+=10;
+                            ToastUtil.showMsg(getApplicationContext(), "you are right!");
+                        } else {
+                            ToastUtil.showMsg(getApplicationContext(), "you are wrong!");
+                        }
+
+                        if (index < questions.size()) {
+                            questionTextView.setText(questions.get(index));
+                            correctAnswer = correctAnswers.get(index);
+                            displayAnswer(correctAnswer);
+                            index++;
+                        }
+                        else{
+                            // Disable all answerTextViews after 10 questions
+                            // store questions, correctAnswers and selectedAnswers into the database by user id
+                            storeDateByUserID();
+
+                            Intent intent = new Intent(GameActivity.this, GameSaveActivity.class);
+                            intent.putExtra("score", score);
+                            intent.putExtra("userID", userID);
+                            startActivity(intent);
+                        }
+                        scoreTextView.setText("Score : "+score);
+                        progressBar.setProgress(++progress);
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
         }
     }
 }
