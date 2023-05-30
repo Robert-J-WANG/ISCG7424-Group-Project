@@ -42,7 +42,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Game.LeaderBoardPage"
+            android:name=".Game.LeaderBoardActivity"
             android:exported="false" />
         <activity
             android:name=".User.HowToPlayPage"

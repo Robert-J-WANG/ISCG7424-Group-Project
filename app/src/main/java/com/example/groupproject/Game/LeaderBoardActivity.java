@@ -26,7 +26,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class LeaderBoardPage extends AppCompatActivity {
+public class LeaderBoardActivity extends AppCompatActivity {
 
     private Button backButton;
     private RelativeLayout leaderboardLayout;
@@ -41,7 +41,7 @@ public class LeaderBoardPage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_leader_board_page);
+        setContentView(R.layout.activity_leader_board);
         leaderboardLayout = findViewById(R.id.leaderboard_layout);
         recyclerView = findViewById(R.id.recycler_view);
 
@@ -92,7 +92,7 @@ public class LeaderBoardPage extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LeaderBoardPage.this, WelcomePage.class);
+                Intent intent = new Intent(LeaderBoardActivity.this, WelcomePage.class);
                 startActivity(intent);
             }
         });

@@ -42,7 +42,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
 import com.example.groupproject.Game.GameMenuActivity;
-import com.example.groupproject.Game.LeaderBoardPage;
+import com.example.groupproject.Game.LeaderBoardActivity;
 import com.example.groupproject.R;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -177,7 +177,7 @@ public class WelcomePage extends AppCompatActivity {
         leaderBoardButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(WelcomePage.this, LeaderBoardPage.class);
+                Intent intent = new Intent(WelcomePage.this, LeaderBoardActivity.class);
                 startActivity(intent);
             }
         });
