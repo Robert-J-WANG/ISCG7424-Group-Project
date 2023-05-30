@@ -8,9 +8,11 @@
 
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="32" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="32" />
     <uses-permission android:name="android.permission.CAMERA" />
 
@@ -23,33 +25,35 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GroupProject"
         tools:targetApi="31">
+        <service
+            android:name=".User.BackgroundSoundService"
+            android:enabled="true"
+            android:exported="true"></service>
 
         <activity
             android:name=".User.LoginPage"
             android:exported="true"
             android:label="Login"
-            android:theme="@style/Theme.Material3.Light.NoActionBar" >
+            android:theme="@style/Theme.Material3.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".User.LeaderBoardPage"
+            android:name=".Game.LeaderBoardPage"
             android:exported="false" />
         <activity
             android:name=".User.HowToPlayPage"
             android:exported="false" />
-
         <activity
             android:name=".User.SignupPage"
             android:exported="false"
-            android:label="Signup"
-           />
+            android:label="Signup" />
         <activity
             android:name=".User.WelcomePage"
-            android:exported="false"/>
-
+            android:exported="false" />
         <activity
             android:name=".Game.DrawActivity"
             android:exported="false" />
@@ -64,9 +68,7 @@
             android:exported="false" />
         <activity
             android:name=".Game.GameMenuActivity"
-            android:exported="false">
-
-        </activity>
+            android:exported="false"></activity>
 
         <meta-data
             android:name="preloaded_fonts"
@@ -81,8 +83,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
-
-
     </application>
 
 </manifest>

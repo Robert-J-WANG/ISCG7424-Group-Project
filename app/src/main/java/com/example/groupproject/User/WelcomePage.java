@@ -42,6 +42,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
 import com.example.groupproject.Game.GameMenuActivity;
+import com.example.groupproject.Game.LeaderBoardPage;
 import com.example.groupproject.R;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -94,12 +95,12 @@ public class WelcomePage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_page);
 
+        Intent svc = new Intent(this, BackgroundSoundService.class);
+        startService(svc); // to start the service
+
         // Retrieve user information from Realtime Database
         user = FirebaseAuth.getInstance().getCurrentUser();
         userRef= FirebaseDatabase.getInstance().getReference("users").child(user.getUid());
-
-
-        startMusic();
 
         //emailTextView = findViewById(R.id.email_textview);
         logOutTextView = findViewById(R.id.logout_textview);
@@ -178,9 +179,6 @@ public class WelcomePage extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(WelcomePage.this, LeaderBoardPage.class);
                 startActivity(intent);
-
-
-
             }
         });
 
@@ -191,8 +189,6 @@ public class WelcomePage extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(WelcomePage.this, HowToPlayPage.class);
                 startActivity(intent);
-
-
             }
         });
     }
@@ -355,7 +351,6 @@ public class WelcomePage extends AppCompatActivity {
                 requestCameraPermission();
             }
         });
-
     }
 
     private void requestCameraPermission() {
@@ -383,7 +378,6 @@ public class WelcomePage extends AppCompatActivity {
             }
         }
     }
-
 
     // Initialize ActivityResultLauncher
     ActivityResultLauncher<Intent> mActivityResultLauncher = registerForActivityResult(
@@ -414,7 +408,6 @@ public class WelcomePage extends AppCompatActivity {
             mActivityResultLauncher.launch(intent);
         }
     }
-
 
     public void showSoundDialog() {
         TextView closeTextView;
@@ -513,58 +506,5 @@ public class WelcomePage extends AppCompatActivity {
 
         return null;
     }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if (mediaPlayer != null) {
-            mediaPlayer.release();
-            mediaPlayer = null;
-        }
-    }
-
-    // Play music track
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        if (mediaPlayer == null) {
-            mediaPlayer = MediaPlayer.create(this, R.raw.bg_music);
-            mediaPlayer.setLooping(true);
-            mediaPlayer.setVolume(100, 100);
-        }
-
-        if (keepMusicPlaying && !mediaPlayer.isPlaying()) {
-            mediaPlayer.start();
-        } else if (!keepMusicPlaying && mediaPlayer.isPlaying()) {
-            mediaPlayer.pause();
-        }
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-
-        if (!keepMusicPlaying && mediaPlayer != null && mediaPlayer.isPlaying()) {
-            mediaPlayer.pause();
-        }
-    }
-
-    //call this to play music on wanted page
-    private void startMusic() {
-        keepMusicPlaying = true;
-        if (mediaPlayer != null && !mediaPlayer.isPlaying()) {
-            mediaPlayer.start();
-        }
-    }
-
-
-    private void stopMusic() {
-        keepMusicPlaying = false;
-        if (mediaPlayer != null && mediaPlayer.isPlaying()) {
-            mediaPlayer.pause();
-        }
-    }
-
 
 }
