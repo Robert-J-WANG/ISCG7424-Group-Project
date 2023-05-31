@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.groupproject.R;
 import com.example.groupproject.User.WelcomePage;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -44,11 +46,12 @@ public class GameDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_detail);
-        initView();
+        initializeView();
 
-        // Get the userName from the previous activity
+        // Get the userID from the previous activity
         userID=getIntent().getStringExtra("userID");
         initializeFirebase();
+
         listQuestions();
         homeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,7 +77,7 @@ public class GameDetailActivity extends AppCompatActivity {
         });
     }
 
-    private void initView() {
+    private void initializeView() {
         homeBtn = findViewById(R.id.home_btn);
         replayBtn = findViewById(R.id.replay_btn);
         drawBtn = findViewById(R.id.draw_btn);

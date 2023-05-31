@@ -63,25 +63,7 @@ public class GameActivity extends AppCompatActivity {
     public GameActivity() {
     }
 
-    private void initView() {
-        scoreTextView = findViewById(R.id.score_textview);
-        questionTextView = findViewById(R.id.question_textview);
-        answer1TextView = findViewById(R.id.answer1_textview);
-        answer2TextView = findViewById(R.id.answer2_textview);
-        answer3TextView = findViewById(R.id.answer3_textview);
-        answer4TextView = findViewById(R.id.answer4_textview);
-        answer5TextView = findViewById(R.id.answer5_textview);
-        answer6TextView = findViewById(R.id.answer6_textview);
-        answerTextViews = new TextView[]{
-                answer1TextView,
-                answer2TextView,
-                answer3TextView,
-                answer4TextView,
-                answer5TextView,
-                answer6TextView
-        };
-        progressBar=findViewById(R.id.progressBar);
-    }
+
 
 
     @SuppressLint("SetTextI18n")
@@ -89,7 +71,7 @@ public class GameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-        initView();
+        initializeView();
         initializeFirebase();
         scoreTextView.setText("Score : "+ score);
 
@@ -109,7 +91,25 @@ public class GameActivity extends AppCompatActivity {
         setAnswerClickListeners();
     }
 
-
+    private void initializeView() {
+        scoreTextView = findViewById(R.id.score_textview);
+        questionTextView = findViewById(R.id.question_textview);
+        answer1TextView = findViewById(R.id.answer1_textview);
+        answer2TextView = findViewById(R.id.answer2_textview);
+        answer3TextView = findViewById(R.id.answer3_textview);
+        answer4TextView = findViewById(R.id.answer4_textview);
+        answer5TextView = findViewById(R.id.answer5_textview);
+        answer6TextView = findViewById(R.id.answer6_textview);
+        answerTextViews = new TextView[]{
+                answer1TextView,
+                answer2TextView,
+                answer3TextView,
+                answer4TextView,
+                answer5TextView,
+                answer6TextView
+        };
+        progressBar=findViewById(R.id.progressBar);
+    }
 
     private void initializeFirebase() {
         firebaseDatabase = FirebaseDatabase.getInstance();

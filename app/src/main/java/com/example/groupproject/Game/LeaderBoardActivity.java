@@ -42,8 +42,7 @@ public class LeaderBoardActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_leader_board);
-        leaderboardLayout = findViewById(R.id.leaderboard_layout);
-        recyclerView = findViewById(R.id.recycler_view);
+        initializeView();
 
         userDataList = new ArrayList<>();
         adapter = new LeaderBoardAdapter(userDataList);
@@ -88,7 +87,6 @@ public class LeaderBoardActivity extends AppCompatActivity {
             }
         });
 
-        backButton = findViewById(R.id.back_button);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,6 +94,12 @@ public class LeaderBoardActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private void initializeView() {
+        leaderboardLayout = findViewById(R.id.leaderboard_layout);
+        recyclerView = findViewById(R.id.recycler_view);
+        backButton = findViewById(R.id.back_button);
     }
 
     private void sortUserDataList() {

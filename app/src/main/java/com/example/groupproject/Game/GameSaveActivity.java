@@ -56,7 +56,7 @@ public class GameSaveActivity extends AppCompatActivity {
      */
     DatabaseReference reference;
 
-    private void initView() {
+    private void initializeView() {
         scoreTextView = findViewById(R.id.tv_score);
         saveBtn = findViewById(R.id.save_btn);
         playAgainBtn = findViewById(R.id.playAgain_btn);
@@ -66,7 +66,8 @@ public class GameSaveActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_save);
-        initView();
+        initializeView();
+
         score = getIntent().getIntExtra("score", 0);
         scoreTextView.setText(Integer.toString(score));
 

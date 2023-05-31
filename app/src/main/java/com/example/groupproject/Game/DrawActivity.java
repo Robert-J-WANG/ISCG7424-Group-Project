@@ -38,57 +38,9 @@ public class DrawActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_draw);
-
-        drawingView = findViewById(R.id.drawingView);
-
-        brushSizeSeekBar = findViewById(R.id.brushSizeSeekBar);
-        colorRadioGroup = findViewById(R.id.colorRadioGroup);
-
-        backBtn = findViewById(R.id.back_btn);
-        clearBtn = findViewById(R.id.clear_btn);
-        exitBtn = findViewById(R.id.exit_btn);
-
-        brushSizeSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                // 设置画笔大小
-                int brushSize = progress;
-                drawingView.setBrushSize(brushSize);
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-                // 不需要实现
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-                // 不需要实现
-            }
-        });
-
-        colorRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @SuppressLint("NonConstantResourceId")
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-
-                switch (checkedId) {
-                    case R.id.redRadioButton:
-                        color = Color.RED;
-                        break;
-                    case R.id.greenRadioButton:
-                        color = Color.GREEN;
-                        break;
-                    case R.id.blueRadioButton:
-                        color = Color.BLUE;
-                        break;
-                    default:
-                        color = Color.BLACK;
-                        break;
-                }
-                drawingView.setBrushColor(color);
-            }
-        });
+        initializeView();
+        setupBrushSizeSeekBar();
+        setupColorRadioGroup();
 
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,6 +69,63 @@ public class DrawActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void initializeView() {
+        drawingView = findViewById(R.id.drawingView);
+
+        brushSizeSeekBar = findViewById(R.id.brushSizeSeekBar);
+        colorRadioGroup = findViewById(R.id.colorRadioGroup);
+
+        backBtn = findViewById(R.id.back_btn);
+        clearBtn = findViewById(R.id.clear_btn);
+        exitBtn = findViewById(R.id.exit_btn);
+
+    }
+    private void setupBrushSizeSeekBar() {
+        brushSizeSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                // 设置画笔大小
+                drawingView.setBrushSize(progress);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                // 不需要实现
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                // 不需要实现
+            }
+        });
+
+    }
+
+    private void setupColorRadioGroup() {
+        colorRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @SuppressLint("NonConstantResourceId")
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+
+                switch (checkedId) {
+                    case R.id.redRadioButton:
+                        color = Color.RED;
+                        break;
+                    case R.id.greenRadioButton:
+                        color = Color.GREEN;
+                        break;
+                    case R.id.blueRadioButton:
+                        color = Color.BLUE;
+                        break;
+                    default:
+                        color = Color.BLACK;
+                        break;
+                }
+                drawingView.setBrushColor(color);
+            }
+        });
     }
 
     /**

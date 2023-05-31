@@ -16,15 +16,13 @@ public class GameMenuActivity extends AppCompatActivity {
     public static final int MODE_MULTIPLY = 3;
     public static final int MODE_DIVIDE = 4;
 
+    private Button randomBtn,addBtn,subBtn,mulBtn,divBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_menu);
-        Button randomBtn = findViewById(R.id.rd_btn);
-        Button addBtn = findViewById(R.id.add_btn);
-        Button subBtn = findViewById(R.id.sub_btn);
-        Button mulBtn = findViewById(R.id.mul_btn);
-        Button divBtn = findViewById(R.id.div_btn);
+        initializeView();
 
         randomBtn.setOnClickListener(v -> startGame(MODE_RANDOM));
 
@@ -35,6 +33,14 @@ public class GameMenuActivity extends AppCompatActivity {
         mulBtn.setOnClickListener(v -> startGame(MODE_MULTIPLY));
 
         divBtn.setOnClickListener(v -> startGame(MODE_DIVIDE));
+    }
+
+    private void initializeView() {
+        randomBtn = findViewById(R.id.rd_btn);
+        addBtn = findViewById(R.id.add_btn);
+        subBtn = findViewById(R.id.sub_btn);
+        mulBtn = findViewById(R.id.mul_btn);
+        divBtn = findViewById(R.id.div_btn);
     }
 
     private void startGame(int mode) {
