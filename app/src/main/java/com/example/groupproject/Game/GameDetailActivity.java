@@ -101,33 +101,38 @@ public class GameDetailActivity extends AppCompatActivity {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                try {
+                    // 从数据快照中获取问题，正确答案和选择的答案数据
+                    DataSnapshot questionsSnapshot = dataSnapshot.child("questions");
+                    DataSnapshot correctAnswersSnapshot = dataSnapshot.child("correctAnswers");
+                    DataSnapshot selectedAnswersSnapshot = dataSnapshot.child("selectedAnswers");
 
-                // 从数据快照中获取问题，正确答案和选择的答案数据
-                DataSnapshot questionsSnapshot = dataSnapshot.child("questions");
-                DataSnapshot correctAnswersSnapshot = dataSnapshot.child("correctAnswers");
-                DataSnapshot selectedAnswersSnapshot = dataSnapshot.child("selectedAnswers");
+                    // 将正确答案数据添加到questions列表
+                    for (DataSnapshot questionSnapshot : questionsSnapshot.getChildren()) {
+                        questions = (ArrayList<String>) questionSnapshot.getValue();
+                    }
 
-                // 将正确答案数据添加到questions列表
-                for (DataSnapshot questionSnapshot : questionsSnapshot.getChildren()) {
-                    questions = (ArrayList<String>) questionSnapshot.getValue();
+                    // 将正确答案数据添加到correctAnswers列表
+                    for (DataSnapshot cAnswerSnapshot : correctAnswersSnapshot.getChildren()) {
+                        correctAnswers = (ArrayList<String>) cAnswerSnapshot.getValue();
+                    }
+
+                    // 将选择的答案数据添加到selectedAnswers列表
+                    for (DataSnapshot sAnswerSnapshot : selectedAnswersSnapshot.getChildren()) {
+                        selectedAnswers = (ArrayList<String>) sAnswerSnapshot.getValue();
+                    }
+
+                    // 初始化并设置RecyclerView适配器
+                    recyclerView = findViewById(R.id.recycler_view);
+                    questionAdapter = new QuestionAdapter(questions, correctAnswers, selectedAnswers);
+                    recyclerView.setAdapter(questionAdapter);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(GameDetailActivity.this));
+                } catch (Exception e) {
+                    // 处理异常
+                    e.printStackTrace();
                 }
-
-                // 将正确答案数据添加到correctAnswers列表
-                for (DataSnapshot cAnswerSnapshot : correctAnswersSnapshot.getChildren()) {
-                    correctAnswers = (ArrayList<String>) cAnswerSnapshot.getValue();
-                }
-
-                // 将选择的答案数据添加到selectedAnswers列表
-                for (DataSnapshot sAnswerSnapshot : selectedAnswersSnapshot.getChildren()) {
-                    selectedAnswers = (ArrayList<String>) sAnswerSnapshot.getValue();
-                }
-
-                // 初始化并设置RecyclerView适配器
-                recyclerView = findViewById(R.id.recycler_view);
-                questionAdapter = new QuestionAdapter(questions,correctAnswers, selectedAnswers);
-                recyclerView.setAdapter(questionAdapter);
-                recyclerView.setLayoutManager(new LinearLayoutManager(GameDetailActivity.this));
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 // 处理数据库读取错误
@@ -135,6 +140,7 @@ public class GameDetailActivity extends AppCompatActivity {
             }
         });
     }
+
 }
 
 

@@ -43,7 +43,7 @@ public class GameMenuActivity extends AppCompatActivity {
         divBtn = findViewById(R.id.div_btn);
     }
 
-    private void startGame(int mode) {
+    public void startGame(int mode) {
         Intent intent = new Intent(this, GameActivity.class);
         intent.putExtra("mode", mode);
         startActivity(intent);

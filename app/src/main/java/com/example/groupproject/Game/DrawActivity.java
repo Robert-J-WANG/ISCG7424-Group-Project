@@ -32,7 +32,7 @@ public class DrawActivity extends AppCompatActivity {
     private SeekBar brushSizeSeekBar;
     private RadioGroup colorRadioGroup;
     private DrawingView drawingView;
-    int color;
+    private int color;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,15 +68,12 @@ public class DrawActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
     }
 
     private void initializeView() {
         drawingView = findViewById(R.id.drawingView);
-
         brushSizeSeekBar = findViewById(R.id.brushSizeSeekBar);
         colorRadioGroup = findViewById(R.id.colorRadioGroup);
-
         backBtn = findViewById(R.id.back_btn);
         clearBtn = findViewById(R.id.clear_btn);
         exitBtn = findViewById(R.id.exit_btn);

@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.RelativeLayout;
 import android.widget.Button;
 import android.content.Intent;
@@ -53,39 +54,54 @@ public class LeaderBoardActivity extends AppCompatActivity {
         usersRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                userDataList.clear(); // 清空之前的数据
+                try {
+                    userDataList.clear(); // 清空之前的数据
 
-                for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
-                    String uid = userSnapshot.getKey();
-                    String userName = userSnapshot.child("userName").getValue(String.class);
+                    for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                        String uid = userSnapshot.getKey();
+                        String userName = userSnapshot.child("userName").getValue(String.class);
 
-                    gameRef = FirebaseDatabase.getInstance().getReference().child("Game").child(uid);
-                    gameRef.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            if (snapshot.exists()) {
-                                int savedNumber = snapshot.child("savedNumber").getValue(Integer.class);
-                                int averageScore = snapshot.child("averageScore").getValue(Integer.class);
+                        gameRef = FirebaseDatabase.getInstance().getReference().child("Game").child(uid);
+                        gameRef.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                try {
+                                    if (snapshot.exists()) {
+                                        int savedNumber = snapshot.child("savedNumber").getValue(Integer.class);
+                                        int averageScore = snapshot.child("averageScore").getValue(Integer.class);
 
-                                UserData userData = new UserData(userName, savedNumber, averageScore);
-                                userDataList.add(userData);
-                                // 每次添加数据后重新排序
-                                sortUserDataList();
-                                adapter.notifyDataSetChanged();
+                                        UserData userData = new UserData(userName, savedNumber, averageScore);
+                                        userDataList.add(userData);
+                                        // 每次添加数据后重新排序
+                                        sortUserDataList();
+                                        adapter.notifyDataSetChanged();
+                                    }
+                                } catch (Exception e) {
+                                    // 处理异常
+                                    e.printStackTrace();
+                                }
                             }
-                        }
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-                            // 处理读取数据错误的情况
-                        }
-                    });
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+                                // 处理读取数据错误的情况
+                                Log.e("Firebase", "Database Error: " + error.getMessage());
+                            }
+                        });
+                    }
+                } catch (Exception e) {
+                    // 处理异常
+                    e.printStackTrace();
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 // 处理读取数据错误的情况
+                Log.e("Firebase", "Database Error: " + error.getMessage());
             }
         });
+
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override

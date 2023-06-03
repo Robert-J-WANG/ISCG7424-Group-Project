@@ -83,7 +83,6 @@
             android:layout_width="0dp"
             android:layout_height="60dp"
             android:layout_margin="10dp"
-            android:layout_marginRight="20dp"
             android:layout_columnWeight="1"
             android:background="@drawable/bg_border_edit_teal"
             android:gravity="center"

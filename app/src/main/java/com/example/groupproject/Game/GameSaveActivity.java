@@ -103,27 +103,30 @@ public class GameSaveActivity extends AppCompatActivity {
      */
     private void getAverageScore(int myScore) {
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
-
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                DataSnapshot savedNumberSnapshot = snapshot.child("savedNumber");
-                DataSnapshot totalScoreSnapshot = snapshot.child("totalScore");
+                try {
+                    DataSnapshot savedNumberSnapshot = snapshot.child("savedNumber");
+                    DataSnapshot totalScoreSnapshot = snapshot.child("totalScore");
 
-                Long savedNumberValue = savedNumberSnapshot.getValue(Long.class);
-                Long totalScoreValue = totalScoreSnapshot.getValue(Long.class);
+                    Long savedNumberValue = savedNumberSnapshot.getValue(Long.class);
+                    Long totalScoreValue = totalScoreSnapshot.getValue(Long.class);
 
-                savedNumber = savedNumberValue != null ? savedNumberValue.intValue() : 0;
-                savedNumber++;
-                reference.child("savedNumber").setValue(savedNumber);
+                    savedNumber = savedNumberValue != null ? savedNumberValue.intValue() : 0;
+                    savedNumber++;
+                    reference.child("savedNumber").setValue(savedNumber);
 
-                int totalScore = totalScoreValue != null ? totalScoreValue.intValue() : 0;
-                totalScore+=myScore;
-                reference.child("totalScore").setValue(totalScore);
+                    int totalScore = totalScoreValue != null ? totalScoreValue.intValue() : 0;
+                    totalScore += myScore;
+                    reference.child("totalScore").setValue(totalScore);
 
-                int averageScore=totalScore/savedNumber;
-                reference.child("averageScore").setValue(averageScore);
+                    int averageScore = totalScore / savedNumber;
+                    reference.child("averageScore").setValue(averageScore);
+                } catch (Exception e) {
+                    // 处理异常
+                    e.printStackTrace();
+                }
             }
-
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -132,4 +135,5 @@ public class GameSaveActivity extends AppCompatActivity {
             }
         });
     }
+
 }

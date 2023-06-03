@@ -28,6 +28,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+
 public class LoginPage extends AppCompatActivity {
     private EditText emailEditText;
     private EditText passwordEditText;
@@ -198,7 +199,7 @@ public class LoginPage extends AppCompatActivity {
 
     }
 
-    private boolean isValidEmail(CharSequence target) {
+    public boolean isValidEmail(CharSequence target) {
         return (!TextUtils.isEmpty(target) && Patterns.EMAIL_ADDRESS.matcher(target).matches());
     }
 

@@ -63,9 +63,6 @@ public class GameActivity extends AppCompatActivity {
     public GameActivity() {
     }
 
-
-
-
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
